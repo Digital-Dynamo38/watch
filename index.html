@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="--device---width, initial-scale=1.0">
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #ededed;
+        }
+        body{
+            background-color: #081b29;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .frame{
+            position: relative;
+        }
+        .clock{
+            width: 400px;
+            height: 400px;
+            background-color: #171e24;
+            border: 1px solid #2f2a2a;
+            border-radius: 50%;
+            box-shadow: 0px 0px 30px #4b4949;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .clock span {
+            position: absolute;
+            transform: rotate(calc(30deg*var(--i)));
+            inset: 12px;
+            text-align: center;
+        }
+        .clock span::before {
+        content: '';
+        position: absolute;
+        top: -6px;
+        left: calc(50% - 1px);
+        width: 2px;
+        height: 6px;
+        background-color: #ededed;
+        transform-origin: bottom;
+        transform: rotate(180deg);
+        }
+        .clock span b{
+            transform: rotate(calc(-30deg* var(--i)));
+            display: inline-block;
+            font-size: 25px;
+            padding: 10px;
+        }
+        .clock::before{
+            content: '';
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            border-radius: 50%;
+            background-color: #ffffff;
+            z-index: 2;
+        }
+        .hands{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hands i{
+            position: absolute;
+            background-color: var(--color);
+            width: var(--width);
+            height: var(--height);
+            border-radius: 8px;
+
+        }
+       .container .digital {
+           position: absolute;
+           left: 50%;
+           margin-top: 30px;
+           transform: translateX(-50%);
+           font-size: 40px;
+           text-align: center;
+           background-color: #171e24;
+           padding: 10px;
+           box-shadow: 0px 0px 20px #4b4949;
+        }
+
+        #d-h,
+        #d-m,
+        #d-s{
+            color: #fff;
+        }
+        .container{
+            border: 1px solid #171e24;
+            box-shadow: 0px 0px 20px #4b4949;
+            border-top-right-radius: 400px;
+            border-top-left-radius: 400px;
+            padding: 0px 10px;
+            height: 630px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 120px;
+        }
+        
+        button {
+            background-color: #171e24;
+            border: none;
+            box-shadow: 0px 0px 10px #4b4949;
+            border-radius: 15px;
+            color: #ededed;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 8px 16px;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        button:hover {
+            background-color: #2f2a2a;
+            border-color: #171e24;
+        }
+        input{
+            color: white;
+            background: transparent;
+            padding: 5px;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px ;
+            margin-top: 25px;
+            margin-left: 20%;
+            box-shadow: 0px 0px 8px #4b4949;
+            text-align: center;
+
+        }
+
+    </style>
+    <title>Analog watch By Digital Dynamo</title>
+</head>
+<body>
+    <div class="container">
+        <div class="frame">
+            <div class="clock">
+                <div class="hands" style="--color:rgb(208, 214, 31); --height:74px; --width: 5px" id="hr"><i></i></div>
+                <div class="hands" style="--color:rgb(196, 26, 26); --height:84px;  --width: 3.5px" id="min"><i></i></div>
+                <div class="hands" style="--color:rgb(42, 197, 179); --height:94px; --width: 2px" id="sec"><i></i></div>
+                <span style="--i:1"><b>1</b></span>
+                <span style="--i:2"><b>2</b></span>
+                <span style="--i:3"><b>3</b></span>
+                <span style="--i:4"><b>4</b></span>
+                <span style="--i:5"><b>5</b></span>
+                <span style="--i:6"><b>6</b></span>
+                <span style="--i:7"><b>7</b></span>
+                <span style="--i:8"><b>8</b></span>
+                <span style="--i:9"><b>9</b></span>
+                <span style="--i:10"><b>10</b></span>
+                <span style="--i:11"><b>11</b></span>
+                <span style="--i:12"><b>12</b></span>
+            </div>
+        </div>
+        <div class="digital">
+            <span id="d-h"></span>&nbsp;<b>:</b>
+            <span id="d-m"></span>&nbsp;<b>:</b>
+            <span id="d-s"></span>
+        </div>
+         <div class="buttons">
+        <a href="stopwatch.html"><button id="button1">Timer</button></a>
+        <a href="alarm.html"><button id="button2">Alarm</button></a>
+    </div>
+        <div class="input">
+            <input type="text" value=" By Aayush Neupane" readonly>
+        </div>
+    </div>
+    
+    <script>
+        let hr = document.getElementById('hr');
+        let min = document.getElementById('min');
+        let sec = document.getElementById('sec');
+
+        setInterval(() => {
+            let date = new Date();
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+
+            let hrRotation = h * 30 + m / 2; // Each hour mark is 30 degrees, and the hour hand moves half a degree per minute
+            let minRotation = m * 6; // Each minute mark is 6 degrees
+            let secRotation = s * 6; // Each second mark is 6 degrees
+
+            // Apply the rotation to each hand
+            hr.style.transform = `rotate(${hrRotation}deg)`;
+            min.style.transform = `rotate(${minRotation}deg)`;
+            sec.style.transform = `rotate(${secRotation}deg)`;
+            }, 1000); // Update every second
+
+            function updateTime() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                
+                document.getElementById('d-h').textContent = hours;
+                document.getElementById('d-m').textContent = minutes;
+                document.getElementById('d-s').textContent = seconds;
+            }
+            setInterval(updateTime, 1000);
+
+            setInterval(()=>{
+                let secsong = new Audio("");
+                secsong.play();
+            }, 1000);
+
+            setInterval(()=>{
+                let minsong = new Audio("");
+                minsong.play();
+            }, 60000);
+
+            setInterval(()=>{
+                let hrsong = new Audio("");
+                hrsong.play();
+            }, 3600000);
+
+
+    </script>
+</body>
+</html>
