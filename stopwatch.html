@@ -57,6 +57,20 @@
         button:hover{
           background-color: var(--hover);
         }
+        input{
+            color: white;
+            background: transparent;
+            padding: 5px;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px ;
+            margin-top: 25px;
+            margin-left: 20%;
+            box-shadow: 0px 0px 8px #4b4949;
+            text-align: center;
+
+        }
     </style>
 </head>
 <body>
@@ -69,6 +83,9 @@
             <button style="--color: Green; --hover:rgb(75, 179, 49);" onclick="return startTimer()"> Start</button>
             <button style="--color: #fb7c14; --hover: rgb(224, 177, 23); " onclick="return resetTimer()"> Reset</button>
         </div>
+        <div class="input">
+          <input type="text" value=" By Aayush Neupane" readonly>
+      </div>
     </div>
     
     <script>
